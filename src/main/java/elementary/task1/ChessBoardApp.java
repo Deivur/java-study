@@ -1,6 +1,6 @@
 package elementary.task1;
 
-public class App {
+public class ChessBoardApp {
 
     private static final String runInstruction = "To run app you need specify at least two number arguments:" +
             " width, height of ChessBoard.";
@@ -9,7 +9,7 @@ public class App {
         checkStartAppArgs(args);
 
         int width = Integer.parseInt(args[0]);
-        int height = Integer.parseInt(args[0]);
+        int height = Integer.parseInt(args[1]);
 
         ChessBoard chessBoard = new ChessBoard(width, height);
         chessBoard.printBoard();
@@ -18,7 +18,7 @@ public class App {
     private static void checkStartAppArgs(String[] args) {
         int requiredNumberOfArguments = 2;
         if (args.length != requiredNumberOfArguments || isNotNumeric(args[0]) || isNotNumeric(args[1])) {
-            System.out.println(App.runInstruction);
+            System.out.println(ChessBoardApp.runInstruction);
             System.exit(1);
         }
     }
