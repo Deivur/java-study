@@ -1,5 +1,7 @@
 package elementary.task1;
 
+import util.StringUtil;
+
 public class ChessBoardApp {
 
     private static final String runInstruction = "To run app you need specify at least two number arguments:" +
@@ -17,13 +19,11 @@ public class ChessBoardApp {
 
     private static void checkStartAppArgs(String[] args) {
         int requiredNumberOfArguments = 2;
-        if (args.length != requiredNumberOfArguments || isNotNumeric(args[0]) || isNotNumeric(args[1])) {
+        if (args.length != requiredNumberOfArguments ||
+                StringUtil.isNotNumeric(args[0]) || StringUtil.isNotNumeric(args[1])) {
+
             System.out.println(ChessBoardApp.runInstruction);
             System.exit(1);
         }
-    }
-
-    private static boolean isNotNumeric(String strNum) {
-        return !strNum.matches("-?\\d+(\\.\\d+)?");
     }
 }
