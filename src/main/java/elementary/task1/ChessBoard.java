@@ -29,6 +29,7 @@ public class ChessBoard {
     }
 
     public void printBoard() {
-        System.out.println(generateBoard(width, height));
+        String generatedBoard = generateBoard(width, height);
+        System.out.println(generatedBoard);
     }
 }
