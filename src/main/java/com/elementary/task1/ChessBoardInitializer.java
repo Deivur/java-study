@@ -1,6 +1,6 @@
-package elementary.task1;
+package com.elementary.task1;
 
-import util.StringUtil;
+import com.elementary.util.StringUtil;
 
 public final class ChessBoardInitializer {
 

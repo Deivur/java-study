@@ -1,4 +1,4 @@
-package elementary.task1;
+package com.elementary.task1;
 
 public class ChessBoard {
 
@@ -10,7 +10,7 @@ public class ChessBoard {
         this.height = height;
     }
 
-    private String generateBoard(int width, int height) {
+    public String generateBoard(int width, int height) {
         StringBuilder board = new StringBuilder();
         for (int i = 0; i < height; i++) {
             if (i % 2 == 0) {
