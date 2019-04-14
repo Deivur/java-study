@@ -1,16 +1,17 @@
-package com.elementary.task1;
+package com.elementary.task.chessboard;
 
-public class ChessBoard {
+import com.elementary.task.figure.Rectangle;
 
-    private int width;
-    private int height;
+public class ChessBoard extends Rectangle {
 
-    ChessBoard(int width, int height) {
-        this.width = width;
-        this.height = height;
+    private String boardView;
+
+    public ChessBoard(int width, int height) {
+        super(width, height);
+        this.boardView = generateBoardView(width, height);
     }
 
-    public String generateBoard(int width, int height) {
+    private String generateBoardView(int width, int height) {
         StringBuilder board = new StringBuilder();
         for (int i = 0; i < height; i++) {
             if (i % 2 == 0) {
@@ -28,8 +29,7 @@ public class ChessBoard {
         return board.toString();
     }
 
-    public void printBoard() {
-        String generatedBoard = generateBoard(width, height);
-        System.out.println(generatedBoard);
+    public void printBoardIntoConsole() {
+        System.out.println(boardView);
     }
 }
