@@ -12,7 +12,9 @@ public final class EnvelopeStarter implements Starter {
     private static final String runInstruction = "To run Envelope app you need " +
             " enter two Envelopes with sides, float values: (a,b) and (c,d)";
 
-    public EnvelopeStarter() {
+    private static EnvelopeStarter STARTER = new EnvelopeStarter();
+
+    private EnvelopeStarter() {
     }
 
     public void start(String[] args) {
@@ -41,5 +43,9 @@ public final class EnvelopeStarter implements Starter {
 
     public void printRunAppInstruction() {
         System.out.println(EnvelopeStarter.runInstruction);
+    }
+
+    public static EnvelopeStarter getInstance() {
+        return STARTER;
     }
 }

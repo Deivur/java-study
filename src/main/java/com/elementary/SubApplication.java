@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 public enum SubApplication {
 
-    CHESSBOARD(new ChessBoardStarter()),
-    ENVELOPE(new EnvelopeStarter());
+    CHESSBOARD(ChessBoardStarter.getInstance()),
+    ENVELOPE(EnvelopeStarter.getInstance());
 
     private Starter starter;
 

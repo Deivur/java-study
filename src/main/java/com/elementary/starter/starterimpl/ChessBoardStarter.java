@@ -11,12 +11,9 @@ public final class ChessBoardStarter implements Starter {
 
     private static final int requiredNumberOfArguments = 2;
 
-    public ChessBoardStarter() {
-    }
+    private static ChessBoardStarter STARTER = new ChessBoardStarter();
 
-    public static void main(String[] args) {
-        ChessBoardStarter chessBoardStarter = new ChessBoardStarter();
-        chessBoardStarter.start(args);
+    private ChessBoardStarter() {
     }
 
     public void start(String[] args) {
@@ -35,5 +32,9 @@ public final class ChessBoardStarter implements Starter {
 
     public void printRunAppInstruction() {
         System.out.println(ChessBoardStarter.runInstruction);
+    }
+
+    public static ChessBoardStarter getInstance() {
+        return STARTER;
     }
 }

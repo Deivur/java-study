@@ -1,19 +1,21 @@
 package com.elementary;
 
 import com.elementary.io.ConsoleReader;
+import com.elementary.starter.Starter;
 
 import java.util.Scanner;
 
 public class Application {
 
-    public static final String instruction = generateInstruction();
+    private static final String instruction = generateInstruction();
 
     public static void main(String[] args) {
         System.out.println(instruction);
         try (Scanner in = new Scanner(System.in)) {
             int appNumber = ConsoleReader.readSingleNumberInput(in);
             SubApplication subApplication = SubApplication.get(appNumber);
-            subApplication.getStarter().start(args);
+            Starter starter = subApplication.getStarter();
+            starter.start(args);
         }
     }
 
