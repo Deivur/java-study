@@ -16,10 +16,9 @@ public final class ConsoleReader {
     }
 
     public static int readIntegerInput(Scanner in, int numberOfTries) {
-        String stringInput = in.next();
         for (int i = 0; i <= numberOfTries; i++) {
             try {
-                return InputValidator.getInt(stringInput);
+                return readIntegerInput(in);
 
             } catch (InputValidationException ive) {
                 if (i < numberOfTries) {
