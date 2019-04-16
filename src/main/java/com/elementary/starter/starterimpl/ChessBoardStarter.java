@@ -7,34 +7,34 @@ import com.elementary.task.chessboard.ChessBoard;
 public final class ChessBoardStarter implements Starter {
 
     private static final String runInstruction = "To run ChessBoard app you need specify at least two" +
-            " number arguments: width, height of ChessBoard.";
+            " integer arguments: width, height of ChessBoard.";
 
     private static final int requiredNumberOfArguments = 2;
 
-    private static ChessBoardStarter STARTER = new ChessBoardStarter();
+    private static ChessBoardStarter CHESS_BOARD_STARTER = new ChessBoardStarter();
 
     private ChessBoardStarter() {
     }
 
     public void start(String[] args) {
 
-        if (InputValidator.isValidNumberArgs(args, requiredNumberOfArguments)) {
-            int width = Integer.parseInt(args[0]);
-            int height = Integer.parseInt(args[1]);
+        if (InputValidator.hasRequiredNumberOfArgs(args, requiredNumberOfArguments)) {
+            int width = InputValidator.getInt(args[0]);
+            int height = InputValidator.getInt(args[1]);
 
             ChessBoard chessBoard = new ChessBoard(width, height);
             chessBoard.printBoardIntoConsole();
 
         } else {
-            printRunAppInstruction();
+            printSubAppRunInstruction();
         }
     }
 
-    public void printRunAppInstruction() {
+    public void printSubAppRunInstruction() {
         System.out.println(ChessBoardStarter.runInstruction);
     }
 
     public static ChessBoardStarter getInstance() {
-        return STARTER;
+        return CHESS_BOARD_STARTER;
     }
 }

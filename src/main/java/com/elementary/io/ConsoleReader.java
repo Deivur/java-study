@@ -1,5 +1,7 @@
 package com.elementary.io;
 
+import com.elementary.exception.ExceptionMessage;
+import com.elementary.exception.InputValidationException;
 import com.elementary.task.envelope.Envelope;
 
 import java.util.Scanner;
@@ -9,25 +11,25 @@ public final class ConsoleReader {
     private ConsoleReader() {
     }
 
-    public static int readSingleNumberInput(Scanner in) {
-        return infiniteWhileNotIntEntered(in);
+    public static int readIntegerInput(Scanner in) {
+        return InputValidator.getInt(in.next());
     }
 
-    private static int infiniteWhileNotIntEntered(Scanner in) {
-        int intInput = -1;
-        boolean stopReading = in.hasNextInt();
-        boolean exit = in.hasNext("exit");
-        stopReading = stopReading || exit;
-        while (!stopReading) {
-            System.out.println("Enter integer value or \"exit\":");
-            in.next();
-            exit = in.hasNext("exit");
-            stopReading = in.hasNextInt() || exit;
+    public static int readIntegerInput(Scanner in, int numberOfTries) {
+        String stringInput = in.next();
+        for (int i = 0; i <= numberOfTries; i++) {
+            try {
+                return InputValidator.getInt(stringInput);
+
+            } catch (InputValidationException ive) {
+                if (i < numberOfTries) {
+                    System.out.println(
+                            String.format("Entered value is not number!" +
+                                    " Try again(attempt left: %s):", (numberOfTries - i)));
+                }
+            }
         }
-        if (!exit) {
-            intInput = in.nextInt();
-        }
-        return intInput;
+        throw new InputValidationException(ExceptionMessage.CANT_READ_INTEGER_AS_INPUT);
     }
 
     public static boolean continueReading(Scanner in) {

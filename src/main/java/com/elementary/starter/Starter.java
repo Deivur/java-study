@@ -4,5 +4,5 @@ public interface Starter {
 
     void start(String[] args);
 
-    void printRunAppInstruction();
+    void printSubAppRunInstruction();
 }

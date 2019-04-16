@@ -10,7 +10,8 @@ import java.util.Scanner;
 public final class EnvelopeStarter implements Starter {
 
     private static final String runInstruction = "To run Envelope app you need " +
-            " enter two Envelopes with sides, float values: (a,b) and (c,d)";
+            " specify number of envelopes for comparision and enter sides float" +
+            " values: (a,b) in turn";
 
     private static EnvelopeStarter STARTER = new EnvelopeStarter();
 
@@ -37,11 +38,11 @@ public final class EnvelopeStarter implements Starter {
             }
 
         } catch (InputMismatchException ime) {
-            printRunAppInstruction();
+            printSubAppRunInstruction();
         }
     }
 
-    public void printRunAppInstruction() {
+    public void printSubAppRunInstruction() {
         System.out.println(EnvelopeStarter.runInstruction);
     }
 
