@@ -17,6 +17,7 @@ public final class EnvelopeStarter implements Starter {
     private EnvelopeStarter() {
     }
 
+    @Override
     public void start(String[] args) {
         try (Scanner in = new Scanner(System.in)) {
 
@@ -56,6 +57,7 @@ public final class EnvelopeStarter implements Starter {
         Envelope.resetCounter();
     }
 
+    @Override
     public void printSubAppRunInstruction() {
         System.out.println(EnvelopeStarter.runInstruction);
     }

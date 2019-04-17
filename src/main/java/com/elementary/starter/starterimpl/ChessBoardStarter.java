@@ -16,6 +16,7 @@ public final class ChessBoardStarter implements Starter {
     private ChessBoardStarter() {
     }
 
+    @Override
     public void start(String[] args) {
 
         if (InputValidator.hasRequiredNumberOfArgs(args, requiredNumberOfArguments)) {
@@ -30,6 +31,7 @@ public final class ChessBoardStarter implements Starter {
         }
     }
 
+    @Override
     public void printSubAppRunInstruction() {
         System.out.println(ChessBoardStarter.runInstruction);
     }
