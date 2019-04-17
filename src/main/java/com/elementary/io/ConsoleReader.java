@@ -4,6 +4,8 @@ import com.elementary.exception.ExceptionMessage;
 import com.elementary.exception.InputValidationException;
 import com.elementary.task.envelope.Envelope;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public final class ConsoleReader {
@@ -45,5 +47,20 @@ public final class ConsoleReader {
         float height = in.nextFloat();
 
         return new Envelope(width, height);
+    }
+
+    public static int getEnvelopeCount(Scanner in) {
+        System.out.println("Enter envelope count for comparision:");
+        return readIntegerInput(in);
+    }
+
+    public static List<Envelope> readEnvelopes(Scanner in, int envelopeCount) {
+        List<Envelope> envelopes = new ArrayList<>();
+        Envelope envelope;
+        for (int i = 0; i < envelopeCount; i++) {
+            envelope = ConsoleReader.readEnvelope(in);
+            envelopes.add(envelope);
+        }
+        return envelopes;
     }
 }

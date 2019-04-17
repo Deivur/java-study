@@ -4,8 +4,7 @@ import com.elementary.io.ConsoleReader;
 import com.elementary.starter.Starter;
 import com.elementary.task.envelope.Envelope;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public final class EnvelopeStarter implements Starter {
 
@@ -21,25 +20,40 @@ public final class EnvelopeStarter implements Starter {
     public void start(String[] args) {
         try (Scanner in = new Scanner(System.in)) {
 
-            Envelope first = ConsoleReader.readEnvelope(in);
-            Envelope second = ConsoleReader.readEnvelope(in);
-
-            boolean availableToPutIn = first.availableToPutIn(second);
-            if (availableToPutIn) {
-                System.out.println("First envelop available to put in second envelope!");
-
-            } else {
-                System.out.println("First envelop not available to put in second envelope!");
-            }
+            enterEnvelopesAndPrintCompariosionResult(in);
 
             boolean continueReading = ConsoleReader.continueReading(in);
             if (continueReading) {
-                start(args);
+                enterEnvelopesAndPrintCompariosionResult(in);
             }
 
         } catch (InputMismatchException ime) {
             printSubAppRunInstruction();
         }
+    }
+
+    private void enterEnvelopesAndPrintCompariosionResult(Scanner in) {
+        int envelopeCount = ConsoleReader.getEnvelopeCount(in);
+
+        List<Envelope> envelopes = ConsoleReader.readEnvelopes(in, envelopeCount);
+
+        Map<Envelope, List<Envelope>> comparisionResult = new HashMap<>();
+        for (Envelope envelope : envelopes) {
+            List<Envelope> envelopesInside = new ArrayList<>();
+            for (Envelope envelopeInside : envelopes) {
+                // remove itself from comparision
+                if (envelope.getEnvelopeNumber() != envelopeInside.getEnvelopeNumber()) {
+
+                    if (envelope.isAvailableToContain(envelopeInside)) {
+                        envelopesInside.add(envelopeInside);
+                    }
+                }
+            }
+            comparisionResult.put(envelope, envelopesInside);
+        }
+
+        Envelope.printComparisionResult(comparisionResult);
+        Envelope.resetCounter();
     }
 
     public void printSubAppRunInstruction() {
