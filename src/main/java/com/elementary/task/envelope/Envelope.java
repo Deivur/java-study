@@ -1,20 +1,53 @@
 package com.elementary.task.envelope;
 
-import com.elementary.task.figure.Rectangle;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Envelope extends Rectangle {
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Envelope {
 
     private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
     private int envelopeNumber;
+    private float width;
+    private float height;
 
     public Envelope(float width, float height) {
-        super(width, height);
+        this.width = width;
+        this.height = height;
         this.envelopeNumber = COUNTER.incrementAndGet();
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public double getDiagonal() {
+        float exponent = 2;
+        return sqrt(pow(width, exponent) + pow(height, exponent));
+    }
+
+    public boolean isAvailableToContain(Envelope envelope) {
+        return isBiggerBySides(envelope) || isContainInside(envelope);
+    }
+
+    private boolean isContainInside(Envelope envelope) {
+        if (envelope.getDiagonal() > this.getDiagonal()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isBiggerBySides(Envelope envelope) {
+        return (this.height > envelope.getHeight() && this.width > envelope.getWidth()) ||
+                this.height > envelope.getWidth() && this.width > envelope.getHeight();
     }
 
     public int getEnvelopeNumber() {
