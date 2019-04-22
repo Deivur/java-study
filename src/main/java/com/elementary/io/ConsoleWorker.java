@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoCloseable {
 
@@ -12,7 +13,11 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     private String errorMessage;
     private T defaultValue;
     private List<T> possibleValues;
-    private List<String> inputErrors;
+
+    @Override
+    public void close() {
+        scanner.close();
+    }
 
     public T read(String message) {
         printPrompt(message);
@@ -70,11 +75,6 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return errorMessage;
     }
 
-    @Override
-    public void close() throws Exception {
-        scanner.close();
-    }
-
     private void printPrompt(String message) {
         String promptMessage = message;
         if (defaultValue != null) {
@@ -84,6 +84,14 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     }
 
     public boolean checkRestrictions(T value) {
-        return possibleValues.contains(value);
+        boolean isValid = true;
+        if (possibleValues != null) {
+            isValid = possibleValues.contains(value);
+            if (!isValid) {
+                System.out.println("Restriction check failed: entered value="
+                        + value + ", acceptable: " + possibleValues);
+            }
+        }
+        return isValid;
     }
 }
