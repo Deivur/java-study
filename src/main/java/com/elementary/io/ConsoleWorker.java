@@ -32,7 +32,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
             if (!validValue) {
                 value = null;
             }
-            if (defaultValue != null) {
+            if (value == null && defaultValue != null) {
                 value = defaultValue;
             }
         } while (value == null);
@@ -75,14 +75,6 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return errorMessage;
     }
 
-    private void printPrompt(String message) {
-        String promptMessage = message;
-        if (defaultValue != null) {
-            promptMessage = promptMessage + "[" + defaultValue + "]";
-        }
-        System.out.println(promptMessage);
-    }
-
     public boolean checkRestrictions(T value) {
         boolean isValid = true;
         if (possibleValues != null) {
@@ -93,5 +85,17 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
             }
         }
         return isValid;
+    }
+
+    public void print(String message) {
+        System.out.println(message);
+    }
+
+    private void printPrompt(String message) {
+        String promptMessage = message;
+        if (defaultValue != null) {
+            promptMessage = promptMessage + "[" + defaultValue + "]";
+        }
+        System.out.println(promptMessage);
     }
 }
