@@ -1,6 +1,5 @@
 package com.elementary;
 
-import com.elementary.io.ConsoleReader;
 import com.elementary.starter.Starter;
 
 import java.util.Scanner;
@@ -15,11 +14,11 @@ public class Application {
             int appNumber = 0;
             // try read users app choice, if failed - run default sub app number "0"
             int numberOfUserTriesChoseSubApp = 3;
-            appNumber = ConsoleReader.readIntegerInput(in, numberOfUserTriesChoseSubApp);
-
-            SubApplication subApplication = SubApplication.getSubAppStarter(appNumber);
-            Starter starter = subApplication.getStarter();
-            starter.start(args);
+//            appNumber = ConsoleReader.readIntegerInput(in, numberOfUserTriesChoseSubApp);
+//
+//            SubApplication subApplication = SubApplication.getSubAppStarter(appNumber);
+//            Starter starter = subApplication.getStarter();
+//            starter.start(args);
 //            System.out.println(String.format("Cant read sub app number: %s. Start default...", message));
 
         }
@@ -35,7 +34,7 @@ public class Application {
                     .append(subApplication.name())
                     .append(System.lineSeparator());
         }
-        instruction.append("enter a number(or run default 0):");
+        instruction.append("enter a number");
         return instruction.toString();
     }
 
