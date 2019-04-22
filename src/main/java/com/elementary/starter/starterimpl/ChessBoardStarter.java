@@ -1,15 +1,13 @@
 package com.elementary.starter.starterimpl;
 
-import com.elementary.io.InputValidator;
 import com.elementary.starter.Starter;
-import com.elementary.task.chessboard.ChessBoard;
 
 public final class ChessBoardStarter implements Starter {
 
-    private static final String runInstruction = "To run ChessBoard app you need specify at least two" +
+    private static final String RUN_INSTRUCTION = "To run ChessBoard app you need specify at least two" +
             " integer arguments: width, height of ChessBoard.";
 
-    private static final int requiredNumberOfArguments = 2;
+    private static final int REQUIRED_NUMBER_OF_ARGUMENTS = 2;
 
     private static ChessBoardStarter CHESS_BOARD_STARTER = new ChessBoardStarter();
 
@@ -19,21 +17,28 @@ public final class ChessBoardStarter implements Starter {
     @Override
     public void start(String[] args) {
 
-        if (InputValidator.hasRequiredNumberOfArgs(args, requiredNumberOfArguments)) {
-            int width = InputValidator.getInt(args[0]);
-            int height = InputValidator.getInt(args[1]);
+        if (args.length >= REQUIRED_NUMBER_OF_ARGUMENTS) {
+            int width;
+            int height;
+            try {
+                width = Integer.parseInt(args[0]);
+                if (width < 0) {
+                    width = Math.abs(width);
+                }
+                height = Integer.parseInt(args[1]);
+                if (height < 0) {
+                    height = Math.abs(height);
+                }
+            } catch (NumberFormatException nfe) {
 
-            ChessBoard chessBoard = new ChessBoard(width, height);
-            chessBoard.printBoardIntoConsole();
+            }
+
+//            ChessBoard chessBoard = new ChessBoard(width, height);
+//            System.out.println(chessBoard);
 
         } else {
-            printSubAppRunInstruction();
+            System.out.println(ChessBoardStarter.RUN_INSTRUCTION);
         }
-    }
-
-    @Override
-    public void printSubAppRunInstruction() {
-        System.out.println(ChessBoardStarter.runInstruction);
     }
 
     public static ChessBoardStarter getInstance() {

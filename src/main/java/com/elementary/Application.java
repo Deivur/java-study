@@ -1,6 +1,5 @@
 package com.elementary;
 
-import com.elementary.exception.InputValidationException;
 import com.elementary.io.ConsoleReader;
 import com.elementary.starter.Starter;
 
@@ -8,29 +7,21 @@ import java.util.Scanner;
 
 public class Application {
 
-    private static final String instruction = generateInstruction();
+    private static final String INSTRUCTION = generateInstruction();
 
     public static void main(String[] args) {
-        System.out.println(instruction);
+        System.out.println(INSTRUCTION);
         try (Scanner in = new Scanner(System.in)) {
             int appNumber = 0;
             // try read users app choice, if failed - run default sub app number "0"
-            try {
-                int numberOfUserTriesChoseSubApp = 3;
-                appNumber = ConsoleReader.readIntegerInput(in, numberOfUserTriesChoseSubApp);
-
-            } catch (InputValidationException ive) {
-                printWrongUserInputForAppChoice(ive.getMessage());
-            }
+            int numberOfUserTriesChoseSubApp = 3;
+            appNumber = ConsoleReader.readIntegerInput(in, numberOfUserTriesChoseSubApp);
 
             SubApplication subApplication = SubApplication.get(appNumber);
             Starter starter = subApplication.getStarter();
-            try {
-                starter.start(args);
+            starter.start(args);
+//            System.out.println(String.format("Cant read sub app number: %s. Start default...", message));
 
-            } catch (InputValidationException ive) {
-                starter.printSubAppRunInstruction();
-            }
         }
     }
 
@@ -48,7 +39,4 @@ public class Application {
         return instruction.toString();
     }
 
-    private static void printWrongUserInputForAppChoice(String message) {
-        System.out.println(String.format("Cant read sub app number: %s. Start default...", message));
-    }
 }

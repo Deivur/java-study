@@ -8,7 +8,7 @@ import java.util.*;
 
 public final class EnvelopeStarter implements Starter {
 
-    private static final String runInstruction = "To run Envelope app you need " +
+    private static final String RUN_INSTRUCTION = "To run Envelope app you need " +
             " specify number of envelopes for comparision and enter sides float" +
             " values: (a,b) in turn";
 
@@ -28,8 +28,6 @@ public final class EnvelopeStarter implements Starter {
                 enterEnvelopesAndPrintCompariosionResult(in);
             }
 
-        } catch (InputMismatchException ime) {
-            printSubAppRunInstruction();
         }
     }
 
@@ -55,11 +53,6 @@ public final class EnvelopeStarter implements Starter {
 
         Envelope.printComparisionResult(comparisionResult);
         Envelope.resetCounter();
-    }
-
-    @Override
-    public void printSubAppRunInstruction() {
-        System.out.println(EnvelopeStarter.runInstruction);
     }
 
     public static EnvelopeStarter getInstance() {

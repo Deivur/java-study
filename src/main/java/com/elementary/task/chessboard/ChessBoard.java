@@ -1,35 +1,67 @@
 package com.elementary.task.chessboard;
 
-import com.elementary.task.figure.Rectangle;
 
-public class ChessBoard extends Rectangle {
+public class ChessBoard {
 
-    private String boardView;
+    private final int width;
+    private final int height;
+    private final String board;
 
     public ChessBoard(int width, int height) {
-        super(width, height);
-        this.boardView = generateBoardView(width, height);
+        this.width = width;
+        this.height = height;
+        this.board = generateBoard(width, height);
     }
 
-    private String generateBoardView(int width, int height) {
+    private String generateBoard(int width, int height) {
         StringBuilder board = new StringBuilder();
+        StringBuilder lineBuilder = new StringBuilder();
+        char blackSquare = '\u25A0';
+        char whiteSquare = '\u25A1';
+        for (int i = 0; i < width; i++) {
+            if (i % 2 == 0) {
+                lineBuilder.append(blackSquare);
+            } else {
+                lineBuilder.append(whiteSquare);
+            }
+        }
+        String line = lineBuilder.toString();
+        String reversedLine;
+        if (width % 2 != 0) {
+            reversedLine = whiteSquare + lineBuilder.substring(0, lineBuilder.length() -1);
+        } else {
+            reversedLine = lineBuilder.reverse().toString();
+        }
+
         for (int i = 0; i < height; i++) {
             if (i % 2 == 0) {
-                board.append(" ");
+                board.append(line);
+            } else {
+                board.append(reversedLine);
             }
-            for (int j = 0; j < width; j++) {
-                if (j % 2 == 0) {
-                    board.append("*");
-                } else {
-                    board.append(" ");
-                }
-            }
-            board.append(System.lineSeparator());
+            board.append("\n");
         }
         return board.toString();
     }
 
-    public void printBoardIntoConsole() {
-        System.out.println(boardView);
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getBoard() {
+        return board;
+    }
+
+    @Override
+    public String toString() {
+        return "ChessBoard{" +
+                "width=" + width +
+                ", height=" + height +
+                ", board=' \n" + board + "\n" +
+                '}';
     }
 }
