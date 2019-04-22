@@ -21,11 +21,7 @@ public enum SubApplication {
         return starter;
     }
 
-    public static SubApplication get(int id) {
-
-        return Arrays.stream(SubApplication.values())
-                .filter(subApplication -> id == subApplication.ordinal())
-                .findFirst()
-                .orElse(SubApplication.CHESSBOARD); // default app
+    public static SubApplication getSubAppStarter(int id) {
+        return SubApplication.values()[id];
     }
 }

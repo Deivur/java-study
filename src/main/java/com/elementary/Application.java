@@ -17,7 +17,7 @@ public class Application {
             int numberOfUserTriesChoseSubApp = 3;
             appNumber = ConsoleReader.readIntegerInput(in, numberOfUserTriesChoseSubApp);
 
-            SubApplication subApplication = SubApplication.get(appNumber);
+            SubApplication subApplication = SubApplication.getSubAppStarter(appNumber);
             Starter starter = subApplication.getStarter();
             starter.start(args);
 //            System.out.println(String.format("Cant read sub app number: %s. Start default...", message));
