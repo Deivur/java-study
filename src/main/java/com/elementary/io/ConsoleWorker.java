@@ -2,12 +2,16 @@ package com.elementary.io;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
-public abstract class InputReader<T, K extends InputReader> {
+public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoCloseable {
+
+    private Scanner scanner = new Scanner(System.in);
 
     private String errorMessage;
     private T defaultValue;
     private List<T> possibleValues;
+    private List<String> inputErrors;
 
     public T read(String message) {
         // TODO: 4/22/19 read logic goes here
@@ -45,5 +49,10 @@ public abstract class InputReader<T, K extends InputReader> {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    @Override
+    public void close() throws Exception {
+        scanner.close();
     }
 }
