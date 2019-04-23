@@ -39,7 +39,10 @@ public class ChessBoard {
             } else {
                 board.append(reversedLine);
             }
-            board.append("\n");
+            // prevent last iteration
+            if ((i + 1) < height) {
+                board.append("\n");
+            }
         }
         return board.toString();
     }
@@ -61,7 +64,6 @@ public class ChessBoard {
         return "ChessBoard{" +
                 "width=" + width +
                 ", height=" + height +
-                ", board=' \n" + board + "\n" +
-                '}';
+                "}";
     }
 }

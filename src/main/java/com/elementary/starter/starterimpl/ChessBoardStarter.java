@@ -1,13 +1,13 @@
 package com.elementary.starter.starterimpl;
 
+import com.elementary.io.IntegerConsoleWorker;
 import com.elementary.starter.Starter;
+import com.elementary.task.chessboard.ChessBoard;
 
 public final class ChessBoardStarter implements Starter {
 
     private static final String RUN_INSTRUCTION = "To run ChessBoard app you need specify at least two" +
             " integer arguments: width, height of ChessBoard.";
-
-    private static final int REQUIRED_NUMBER_OF_ARGUMENTS = 2;
 
     private static ChessBoardStarter CHESS_BOARD_STARTER = new ChessBoardStarter();
 
@@ -16,28 +16,13 @@ public final class ChessBoardStarter implements Starter {
 
     @Override
     public void start(String[] args) {
-
-        if (args.length >= REQUIRED_NUMBER_OF_ARGUMENTS) {
-            int width;
-            int height;
-            try {
-                width = Integer.parseInt(args[0]);
-                if (width < 0) {
-                    width = Math.abs(width);
-                }
-                height = Integer.parseInt(args[1]);
-                if (height < 0) {
-                    height = Math.abs(height);
-                }
-            } catch (NumberFormatException nfe) {
-
-            }
-
-//            ChessBoard chessBoard = new ChessBoard(width, height);
-//            System.out.println(chessBoard);
-
-        } else {
-            System.out.println(ChessBoardStarter.RUN_INSTRUCTION);
+        try (IntegerConsoleWorker consoleWorker =
+                     new IntegerConsoleWorker().setDefaultValue(15).setMinValue(0)) {
+            consoleWorker.print(RUN_INSTRUCTION);
+            int width = consoleWorker.read("Enter an integer chessboard width");
+            int height = consoleWorker.read("Enter an integer chessboard height");
+            ChessBoard chessBoard = new ChessBoard(width, height);
+            consoleWorker.print(chessBoard.getBoard());
         }
     }
 
