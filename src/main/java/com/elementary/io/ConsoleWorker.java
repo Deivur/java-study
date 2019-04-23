@@ -19,25 +19,27 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     }
 
     public T read(String message) {
-        printPrompt(message);
         T value;
         do {
+            printPrompt(message);
             String input = scanner.next();
             if (input.equals("exit")) {
                 throw new IllegalStateException("Exit was entered, app closed!");
             }
             value = parse(input).orElse(null);
-            boolean validValue = checkRestrictions(value);
-            if (!validValue) {
-                value = null;
-            }
             if (value == null) {
                 if (errorMessage != null) {
                     System.out.println(errorMessage);
+                } else {
+                    System.out.println("Entered value is not valid!" );
                 }
                 if (defaultValue != null) {
-                    System.out.println("Error in the input! Take default value: " + defaultValue);
+                    System.out.println("Take default value: " + defaultValue);
                     value = defaultValue;
+                }
+            } else {
+                if (!checkedRestrictions(value)) {
+                    value = null;
                 }
             }
         } while (value == null);
@@ -48,13 +50,9 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     protected abstract Optional<T> parse(String input);
 
     @SuppressWarnings("unchecked")
-    public K sethDefaultValue(T value) {
+    public K setDefaultValue(T value) {
         this.defaultValue = value;
         return (K) this;
-    }
-
-    public T getDefaultValue() {
-        return defaultValue;
     }
 
     @SuppressWarnings("unchecked")
@@ -66,21 +64,13 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return (K) this;
     }
 
-    public List<T> getPossibleValues() {
-        return possibleValues;
-    }
-
     @SuppressWarnings("unchecked")
     public K setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
         return (K) this;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public boolean checkRestrictions(T value) {
+    public boolean checkedRestrictions(T value) {
         boolean isValid = true;
         if (possibleValues != null) {
             isValid = possibleValues.contains(value);
@@ -99,7 +89,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     private void printPrompt(String message) {
         String promptMessage = message;
         if (defaultValue != null) {
-            promptMessage = promptMessage + "[" + defaultValue + "]";
+            promptMessage = promptMessage + " default(" + defaultValue + ")";
         }
         System.out.println(promptMessage);
     }

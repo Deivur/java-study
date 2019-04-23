@@ -6,18 +6,10 @@ public abstract class ComparableConsoleWorker<T extends Comparable, K extends Co
     private T minValue;
     private T maxValue;
 
-    public T getMinValue() {
-        return minValue;
-    }
-
     @SuppressWarnings("unchecked")
     public K setMinValue(T minValue) {
         this.minValue = minValue;
         return (K) this;
-    }
-
-    public T getMaxValue() {
-        return maxValue;
     }
 
     @SuppressWarnings("unchecked")
@@ -33,8 +25,8 @@ public abstract class ComparableConsoleWorker<T extends Comparable, K extends Co
     }
 
     @Override
-    public boolean checkRestrictions(T value) {
-        boolean isValidPreviousRestrictions = super.checkRestrictions(value);
+    public boolean checkedRestrictions(T value) {
+        boolean isValidPreviousRestrictions = super.checkedRestrictions(value);
         boolean isValid = isInRange(value);
         if (!isValid) {
             String message = "Expected a " + value.getClass().getSimpleName().toLowerCase();
