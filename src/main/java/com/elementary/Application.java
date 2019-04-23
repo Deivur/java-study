@@ -9,6 +9,7 @@ public class Application {
     private static final String INSTRUCTION = generateInstruction();
 
     public static void main(String[] args) {
+
         System.out.println(INSTRUCTION);
         try (Scanner in = new Scanner(System.in)) {
             int appNumber = 0;

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoCloseable {
 
@@ -32,8 +31,14 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
             if (!validValue) {
                 value = null;
             }
-            if (value == null && defaultValue != null) {
-                value = defaultValue;
+            if (value == null) {
+                if (errorMessage != null) {
+                    System.out.println(errorMessage);
+                }
+                if (defaultValue != null) {
+                    System.out.println("Error in the input! Take default value: " + defaultValue);
+                    value = defaultValue;
+                }
             }
         } while (value == null);
 
@@ -43,7 +48,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     protected abstract Optional<T> parse(String input);
 
     @SuppressWarnings("unchecked")
-    public K withDefaultValue(T value) {
+    public K sethDefaultValue(T value) {
         this.defaultValue = value;
         return (K) this;
     }
@@ -53,7 +58,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
     }
 
     @SuppressWarnings("unchecked")
-    public K withPossibleValues(T... possibleValues) {
+    public K setPossibleValues(T... possibleValues) {
         this.possibleValues = null;
         if (possibleValues.length > 0) {
             this.possibleValues = Arrays.asList(possibleValues);
