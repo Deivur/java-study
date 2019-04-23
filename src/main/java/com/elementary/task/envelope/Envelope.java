@@ -11,9 +11,9 @@ public class Envelope {
 
     private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
-    private int envelopeNumber;
-    private float width;
-    private float height;
+    private final int envelopeNumber;
+    private final double width;
+    private final double height;
 
     public Envelope(float width, float height) {
         this.width = width;
@@ -21,11 +21,11 @@ public class Envelope {
         this.envelopeNumber = COUNTER.incrementAndGet();
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 

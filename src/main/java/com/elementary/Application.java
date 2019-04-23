@@ -34,5 +34,4 @@ public class Application {
         instruction.append("enter a number");
         return instruction.toString();
     }
-
 }
