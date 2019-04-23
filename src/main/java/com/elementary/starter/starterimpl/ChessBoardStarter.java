@@ -16,8 +16,10 @@ public final class ChessBoardStarter implements Starter {
 
     @Override
     public void start(String[] args) {
+        int minAcceptance = 0;
+        int defaultInput = 11;
         try (IntegerConsoleWorker consoleWorker =
-                     new IntegerConsoleWorker().setDefaultValue(15).setMinValue(0)) {
+                     new IntegerConsoleWorker().setDefaultValue(defaultInput).setMinValue(minAcceptance)) {
             consoleWorker.print(RUN_INSTRUCTION);
             int width = consoleWorker.read("Enter an integer chessboard width");
             int height = consoleWorker.read("Enter an integer chessboard height");
