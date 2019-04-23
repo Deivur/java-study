@@ -38,7 +38,8 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
                     value = defaultValue;
                 }
             } else {
-                if (!checkedRestrictions(value)) {
+                boolean isValid = checkConditions(value);
+                if (!isValid) {
                     value = null;
                 }
             }
@@ -70,7 +71,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return (K) this;
     }
 
-    public boolean checkedRestrictions(T value) {
+    public boolean checkConditions(T value) {
         boolean isValid = true;
         if (possibleValues != null) {
             isValid = possibleValues.contains(value);
