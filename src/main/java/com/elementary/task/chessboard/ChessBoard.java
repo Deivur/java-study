@@ -1,6 +1,8 @@
 package com.elementary.task.chessboard;
 
 
+import com.elementary.util.NumberUtil;
+
 public class ChessBoard {
 
     private final int width;
@@ -19,7 +21,7 @@ public class ChessBoard {
         char blackSquare = '\u25A0';
         char whiteSquare = '\u25A1';
         for (int i = 0; i < width; i++) {
-            if (i % 2 == 0) {
+            if (NumberUtil.isEven(i)) {
                 lineBuilder.append(blackSquare);
             } else {
                 lineBuilder.append(whiteSquare);
@@ -27,14 +29,14 @@ public class ChessBoard {
         }
         String line = lineBuilder.toString();
         String reversedLine;
-        if (width % 2 != 0) {
+        if (NumberUtil.isOdd(width)) {
             reversedLine = whiteSquare + lineBuilder.substring(0, lineBuilder.length() -1);
         } else {
             reversedLine = lineBuilder.reverse().toString();
         }
 
         for (int i = 0; i < height; i++) {
-            if (i % 2 == 0) {
+            if (NumberUtil.isEven(i)) {
                 board.append(line);
             } else {
                 board.append(reversedLine);

@@ -39,9 +39,10 @@ public class Envelope {
     }
 
     private boolean isContainInside(Envelope envelope) {
-        if (envelope.getDiagonal() > this.getDiagonal()) {
+        if (this.getDiagonal() < envelope.getDiagonal()) {
             return false;
         }
+
         return true;
     }
 
