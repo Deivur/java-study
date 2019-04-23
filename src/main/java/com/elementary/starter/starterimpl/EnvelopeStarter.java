@@ -1,5 +1,8 @@
 package com.elementary.starter.starterimpl;
 
+import com.elementary.io.DoubleConsoleWorker;
+import com.elementary.io.IntegerConsoleWorker;
+import com.elementary.io.StringConsoleWorker;
 import com.elementary.starter.Starter;
 import com.elementary.task.envelope.Envelope;
 
@@ -18,6 +21,11 @@ public final class EnvelopeStarter implements Starter {
 
     @Override
     public void start(String[] args) {
+        try (StringConsoleWorker stringConsoleWorker = new StringConsoleWorker();
+             DoubleConsoleWorker doubleConsoleWorker = new DoubleConsoleWorker();
+             IntegerConsoleWorker integerConsoleWorker = new IntegerConsoleWorker()) {
+
+        }
 //        try (Scanner in = new Scanner(System.in)) {
 //
 //            enterEnvelopesAndPrintCompariosionResult(in);
