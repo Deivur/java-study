@@ -1,12 +1,9 @@
 package com.elementary.starter.starterimpl;
 
 import com.elementary.io.DoubleConsoleWorker;
-import com.elementary.io.IntegerConsoleWorker;
 import com.elementary.io.StringConsoleWorker;
 import com.elementary.starter.Starter;
 import com.elementary.task.envelope.Envelope;
-
-import java.util.*;
 
 public final class EnvelopeStarter implements Starter {
 
@@ -22,44 +19,27 @@ public final class EnvelopeStarter implements Starter {
     @Override
     public void start(String[] args) {
         try (StringConsoleWorker stringConsoleWorker = new StringConsoleWorker();
-             DoubleConsoleWorker doubleConsoleWorker = new DoubleConsoleWorker();
-             IntegerConsoleWorker integerConsoleWorker = new IntegerConsoleWorker()) {
+             DoubleConsoleWorker doubleConsoleWorker = new DoubleConsoleWorker()) {
+            stringConsoleWorker.print(RUN_INSTRUCTION);
+            String continueAnswer;
+            do {
+                Envelope first = readEnvelope(doubleConsoleWorker);
+                Envelope second = readEnvelope(doubleConsoleWorker);
+                if (first.isAvailableToContain(second)) {
+                    stringConsoleWorker.print("First envelope may contain the second");
+                } else {
+                    stringConsoleWorker.print("First envelope may not contain the second");
+                }
+                continueAnswer = stringConsoleWorker.read("Do you want to continue?");
+            } while (continueAnswer.equals("yes") || continueAnswer.equals("y"));
 
         }
-//        try (Scanner in = new Scanner(System.in)) {
-//
-//            enterEnvelopesAndPrintCompariosionResult(in);
-//
-//            boolean continueReading = ConsoleReader.continueReading(in);
-//            if (continueReading) {
-//                enterEnvelopesAndPrintCompariosionResult(in);
-//            }
-//
-//        }
     }
 
-    private void enterEnvelopesAndPrintCompariosionResult(Scanner in) {
-//        int envelopeCount = ConsoleReader.getEnvelopeCount(in);
-//
-//        List<Envelope> envelopes = ConsoleReader.readEnvelopes(in, envelopeCount);
-//
-//        Map<Envelope, List<Envelope>> comparisionResult = new HashMap<>();
-//        for (Envelope envelope : envelopes) {
-//            List<Envelope> envelopesInside = new ArrayList<>();
-//            for (Envelope envelopeInside : envelopes) {
-//                // remove itself from comparision
-//                if (envelope.getEnvelopeNumber() != envelopeInside.getEnvelopeNumber()) {
-//
-//                    if (envelope.isAvailableToContain(envelopeInside)) {
-//                        envelopesInside.add(envelopeInside);
-//                    }
-//                }
-//            }
-//            comparisionResult.put(envelope, envelopesInside);
-//        }
-//
-//        Envelope.printComparisionResult(comparisionResult);
-//        Envelope.resetCounter();
+    private Envelope readEnvelope(DoubleConsoleWorker doubleConsoleWorker) {
+        double width = doubleConsoleWorker.read("Enter envelope width:");
+        double height = doubleConsoleWorker.read("Enter envelope height:");
+        return new Envelope(width, height);
     }
 
     public static EnvelopeStarter getInstance() {

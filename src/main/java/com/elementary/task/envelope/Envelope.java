@@ -7,7 +7,7 @@ public class Envelope {
     private final double width;
     private final double height;
 
-    public Envelope(float width, float height) {
+    public Envelope(double width, double height) {
         this.width = width;
         this.height = height;
     }
