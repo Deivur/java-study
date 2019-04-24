@@ -71,7 +71,7 @@ public class Triangle {
     }
 
     private boolean exist(double sideA, double sideB, double sideC) {
-        return sideA <= sideB + sideC && sideB <= sideA + sideC && sideC <= sideA + sideB;
+        return sideA < sideB + sideC && sideB < sideA + sideC && sideC < sideA + sideB;
     }
 
     @Override

@@ -42,7 +42,7 @@ public final class TriangleStarter implements Starter {
                 }
             } while (consoleWorker.continueInput());
             triangles.sort(Comparator.comparing(Triangle::getSquare));
-            consoleWorker.print(triangles.toString());
+            triangles.forEach(t -> consoleWorker.print(t.toString()));
         }
     }
 
