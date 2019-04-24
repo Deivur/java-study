@@ -1,8 +1,7 @@
-package com.elementary.starter.starterimpl;
+package com.elementary.starter;
 
 import com.elementary.io.IntegerConsoleWorker;
-import com.elementary.starter.Starter;
-import com.elementary.task.chessboard.ChessBoard;
+import com.elementary.task.ChessBoard;
 
 public final class ChessBoardStarter implements Starter {
 

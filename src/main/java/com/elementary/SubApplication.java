@@ -1,15 +1,15 @@
 package com.elementary;
 
 import com.elementary.starter.Starter;
-import com.elementary.starter.starterimpl.ChessBoardStarter;
-import com.elementary.starter.starterimpl.EnvelopeStarter;
-
-import java.util.Arrays;
+import com.elementary.starter.ChessBoardStarter;
+import com.elementary.starter.EnvelopeStarter;
+import com.elementary.starter.TriangleStarter;
 
 public enum SubApplication {
 
     CHESSBOARD(ChessBoardStarter.getInstance()),
-    ENVELOPE(EnvelopeStarter.getInstance());
+    ENVELOPE(EnvelopeStarter.getInstance()),
+    TRIANGLE(TriangleStarter.getInstance());
 
     private Starter starter;
 

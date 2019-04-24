@@ -83,6 +83,12 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return isValid;
     }
 
+    public boolean continueInput() {
+        print("Do you want to continue?");
+        String continueAnswer = scanner.next();
+        return continueAnswer.equals("yes") || continueAnswer.equals("y");
+    }
+
     public void print(String message) {
         System.out.println(message);
     }

@@ -10,6 +10,6 @@ public final class NumberUtil {
     }
 
     public static boolean isOdd(int number) {
-        return (number & 1) != 0;
+        return (number & 1) == 1;
     }
 }

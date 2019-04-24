@@ -1,4 +1,4 @@
-package com.elementary.task.chessboard;
+package com.elementary.task;
 
 
 import com.elementary.util.NumberUtil;
