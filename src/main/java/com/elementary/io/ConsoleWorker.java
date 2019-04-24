@@ -22,7 +22,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         T value;
         do {
             printPrompt(message);
-            String input = scanner.next();
+            String input = scanner.nextLine();
             if (input.equals("exit")) {
                 throw new IllegalStateException("Exit was entered, app closed!");
             }
@@ -85,7 +85,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
 
     public boolean continueInput() {
         print("Do you want to continue?");
-        String continueAnswer = scanner.next();
+        String continueAnswer = scanner.nextLine();
         return continueAnswer.equals("yes") || continueAnswer.equals("y");
     }
 
@@ -98,6 +98,6 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         if (defaultValue != null) {
             promptMessage = promptMessage + " default(" + defaultValue + ")";
         }
-        System.out.println(promptMessage);
+        print(promptMessage);
     }
 }

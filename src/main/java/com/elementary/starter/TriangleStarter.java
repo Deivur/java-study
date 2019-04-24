@@ -5,6 +5,7 @@ import com.elementary.io.StringConsoleWorker;
 import com.elementary.task.Triangle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,17 +25,25 @@ public final class TriangleStarter implements Starter {
         try (StringConsoleWorker consoleWorker = new StringConsoleWorker()) {
             consoleWorker.print(RUN_INSTRUCTION);
             List<Triangle> triangles = new ArrayList<>();
+            Triangle triangle;
             String input;
-            List<String> triangleParams;
+            String[] params;
             do {
                 input = consoleWorker.read("Input triangle: <name>, <side length>, <side length>, <side length>");
-
-
+                params = input.split(",");
+                for (int i = 0; i < params.length; i++) {
+                    params[i] = params[i].trim().toLowerCase();
+                }
+                try {
+                    triangle = Triangle.from(params);
+                    triangles.add(triangle);
+                } catch (IllegalArgumentException iae) {
+                    consoleWorker.print(iae.getMessage());
+                }
             } while (consoleWorker.continueInput());
             triangles.sort(Comparator.comparing(Triangle::getSquare));
             consoleWorker.print(triangles.toString());
         }
-
     }
 
     public static TriangleStarter getInstance() {
