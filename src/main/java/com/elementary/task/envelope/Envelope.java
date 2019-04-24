@@ -1,24 +1,15 @@
 package com.elementary.task.envelope;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Envelope {
 
-    private static final AtomicInteger COUNTER = new AtomicInteger(0);
-
-    private final int envelopeNumber;
     private final double width;
     private final double height;
 
     public Envelope(float width, float height) {
         this.width = width;
         this.height = height;
-        this.envelopeNumber = COUNTER.incrementAndGet();
     }
 
     public double getWidth() {
@@ -29,21 +20,29 @@ public class Envelope {
         return height;
     }
 
-    public double getDiagonal() {
-        float exponent = 2;
-        return sqrt(pow(width, exponent) + pow(height, exponent));
-    }
 
     public boolean isAvailableToContain(Envelope envelope) {
         return isBiggerBySides(envelope) || isContainInside(envelope);
     }
 
     private boolean isContainInside(Envelope envelope) {
-        if (this.getDiagonal() < envelope.getDiagonal()) {
-            return false;
-        }
+        // width > height if not - rotate
+        // a,b (width,height) - this envelope, p,q (width,height) - argument envelope
+        double a = this.getLongerSide();
+        double b = this.getShorterSide();
 
-        return true;
+        double p = envelope.getLongerSide();
+        double q = envelope.getShorterSide();
+
+        return b >= (2 * p * q * a + (p * p - q * q) * sqrt(p * p + q * q - a * a)) / (p * p + q * q);
+    }
+
+    private double getLongerSide() {
+        return this.width > this.height ? this.width : this.height;
+    }
+
+    private double getShorterSide() {
+        return this.width < this.height ? this.width : this.height;
     }
 
     private boolean isBiggerBySides(Envelope envelope) {
@@ -51,41 +50,9 @@ public class Envelope {
                 this.height > envelope.getWidth() && this.width > envelope.getHeight();
     }
 
-    public int getEnvelopeNumber() {
-        return envelopeNumber;
-    }
-
-    public static void resetCounter() {
-        COUNTER.set(0);
-    }
-
-    public static void printComparisionResult(Map<Envelope, List<Envelope>> comparisionResult) {
-        comparisionResult.forEach((envelope, envelopeList) -> {
-            if (envelopeList.isEmpty()) {
-                printNotContainAnyEnvelope(envelope);
-
-            } else {
-                printContainEnvelopes(envelope, envelopeList);
-            }
-        });
-    }
-
-    private static void printContainEnvelopes(Envelope envelope, List<Envelope> envelopeList) {
-        StringBuilder message = new StringBuilder(envelope + " contain:");
-        for (Envelope containedEnvelope : envelopeList) {
-            message.append(containedEnvelope.getEnvelopeNumber()).append(" ");
-        }
-        System.out.println(message.toString());
-    }
-
-    private static void printNotContainAnyEnvelope(Envelope envelope) {
-        System.out.println(envelope + " not cannot contain other envelope.");
-    }
-
     @Override
     public String toString() {
         return "Envelope{" +
-                "number=" + envelopeNumber +
                 " (width=" + getWidth() + "," +
                 " height=" + getHeight() + ")" +
                 '}';
