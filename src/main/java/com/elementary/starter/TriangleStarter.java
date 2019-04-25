@@ -25,17 +25,14 @@ public final class TriangleStarter implements Starter {
         try (StringConsoleWorker consoleWorker = new StringConsoleWorker()) {
             consoleWorker.print(RUN_INSTRUCTION);
             List<Triangle> triangles = new ArrayList<>();
-            Triangle triangle;
-            String input;
-            String[] params;
             do {
-                input = consoleWorker.read("Input triangle: <name>, <side length>, <side length>, <side length>");
-                params = input.split(",");
+                String input = consoleWorker.read("Input triangle: <name>, <side length>, <side length>, <side length>");
+                String[] params = input.split(",");
                 for (int i = 0; i < params.length; i++) {
                     params[i] = params[i].trim().toLowerCase();
                 }
                 try {
-                    triangle = Triangle.from(params);
+                    Triangle triangle = Triangle.from(params);
                     triangles.add(triangle);
                 } catch (IllegalArgumentException iae) {
                     consoleWorker.print(iae.getMessage());
