@@ -29,9 +29,6 @@ public class Triangle {
 
     public static Triangle from(String[] params) {
         if (params.length < REQUIRED_ATTRIBUTE_NUMBER) {
-            for (String param : params) {
-                System.out.println("'" + param + "'");
-            }
             String errorMessage = "Required " + REQUIRED_ATTRIBUTE_NUMBER + " attributes, passed " + params.length;
             throw new IllegalArgumentException(errorMessage);
         } else {

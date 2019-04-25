@@ -39,7 +39,7 @@ public abstract class ComparableConsoleWorker<T extends Comparable, K extends Co
             if(maxValue != null &&  minValue == null) {
                 message += " value less than or equal to " + maxValue + ".";
             }
-            System.out.println(message);
+            print(message);
         }
         return isValid & isValidPreviousCheck;
     }

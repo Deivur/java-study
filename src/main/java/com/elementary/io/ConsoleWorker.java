@@ -25,12 +25,12 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
             value = parse(input);
             if (value == null) {
                 if (errorMessage != null) {
-                    System.out.println(errorMessage);
+                    print(errorMessage);
                 } else {
-                    System.out.println("Entered value is not valid!" );
+                    print("Entered value is not valid!" );
                 }
                 if (defaultValue != null) {
-                    System.out.println("Take default value: " + defaultValue);
+                    print("Take default value: " + defaultValue);
                     value = defaultValue;
                 }
             } else {
@@ -72,7 +72,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         if (possibleValues != null) {
             isValid = possibleValues.contains(value);
             if (!isValid) {
-                System.out.println("Restriction check failed: entered value="
+                print("Restriction check failed: entered value="
                         + value + ", acceptable: " + possibleValues);
             }
         }
