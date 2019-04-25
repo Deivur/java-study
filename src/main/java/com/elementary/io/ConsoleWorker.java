@@ -2,7 +2,6 @@ package com.elementary.io;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoCloseable {
@@ -23,10 +22,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         do {
             printPrompt(message);
             String input = scanner.nextLine();
-            if (input.equals("exit")) {
-                throw new IllegalStateException("Exit was entered, app closed!");
-            }
-            value = parse(input).orElse(null);
+            value = parse(input);
             if (value == null) {
                 if (errorMessage != null) {
                     System.out.println(errorMessage);
@@ -48,7 +44,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
         return value;
     }
 
-    protected abstract Optional<T> parse(String input);
+    protected abstract T parse(String input);
 
     @SuppressWarnings("unchecked")
     public K setDefaultValue(T value) {
