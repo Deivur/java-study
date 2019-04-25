@@ -17,36 +17,44 @@ public class ChessBoard {
 
     private String generateBoard(int width, int height) {
         StringBuilder board = new StringBuilder();
-        StringBuilder lineBuilder = new StringBuilder();
-        char blackSquare = '\u25A0';
-        char whiteSquare = '\u25A1';
-        for (int i = 0; i < width; i++) {
-            if (NumberUtil.isEven(i)) {
-                lineBuilder.append(blackSquare);
-            } else {
-                lineBuilder.append(whiteSquare);
-            }
-        }
-        String line = lineBuilder.toString();
-        String reversedLine;
-        if (NumberUtil.isOdd(width)) {
-            reversedLine = whiteSquare + lineBuilder.substring(0, lineBuilder.length() -1);
-        } else {
-            reversedLine = lineBuilder.reverse().toString();
-        }
-
+        String line = generateLine(width);
+        String inverseLine = generateInverseLine(width);
         for (int i = 0; i < height; i++) {
             if (NumberUtil.isEven(i)) {
                 board.append(line);
             } else {
-                board.append(reversedLine);
+                board.append(inverseLine);
             }
-            // prevent last iteration
-            if ((i + 1) < height) {
-                board.append("\n");
+            board.append("\n");
+        }
+        return board.substring(0, board.length() - 1);
+    }
+
+    private String generateLine(int length) {
+        return generateLine(length, false);
+    }
+
+    private String generateInverseLine(int length) {
+        return generateLine(length, true);
+    }
+
+    private String generateLine(int length, boolean inverse) {
+        StringBuilder lineBuilder = new StringBuilder();
+        char firstCell = '■';
+        char secondCell = '□';
+        if (inverse) {
+            char tmp = firstCell;
+            firstCell = secondCell;
+            secondCell = tmp;
+        }
+        for (int i = 0; i < length; i++) {
+            if (NumberUtil.isEven(i)) {
+                lineBuilder.append(firstCell);
+            } else {
+                lineBuilder.append(secondCell);
             }
         }
-        return board.toString();
+        return lineBuilder.toString();
     }
 
     public int getWidth() {
