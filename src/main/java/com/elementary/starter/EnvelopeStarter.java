@@ -1,7 +1,6 @@
 package com.elementary.starter;
 
 import com.elementary.io.DoubleConsoleWorker;
-import com.elementary.io.StringConsoleWorker;
 import com.elementary.task.Envelope;
 
 public final class EnvelopeStarter implements Starter {

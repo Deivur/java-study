@@ -26,6 +26,6 @@ public final class ChessBoardStarter implements Starter {
     }
 
     public static ChessBoardStarter getInstance() {
-        return CHESS_BOARD_STARTER;
+        return ChessBoardStarter.CHESS_BOARD_STARTER;
     }
 }

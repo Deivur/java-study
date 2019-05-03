@@ -1,15 +1,13 @@
 package com.elementary;
 
-import com.elementary.starter.Starter;
-import com.elementary.starter.ChessBoardStarter;
-import com.elementary.starter.EnvelopeStarter;
-import com.elementary.starter.TriangleStarter;
+import com.elementary.starter.*;
 
 public enum SubApplication {
 
     CHESSBOARD(ChessBoardStarter.getInstance()),
     ENVELOPE(EnvelopeStarter.getInstance()),
-    TRIANGLE(TriangleStarter.getInstance());
+    TRIANGLE(TriangleStarter.getInstance()),
+    FILE_PARSER(FileParserStarter.getInstance());
 
     private Starter starter;
 

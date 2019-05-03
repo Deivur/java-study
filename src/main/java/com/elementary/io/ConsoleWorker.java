@@ -27,7 +27,7 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
                 if (errorMessage != null) {
                     print(errorMessage);
                 } else {
-                    print("Entered value is not valid!" );
+                    print("Entered value is not valid!");
                 }
                 if (defaultValue != null) {
                     print("Take default value: " + defaultValue);
@@ -87,6 +87,10 @@ public abstract class ConsoleWorker<T, K extends ConsoleWorker> implements AutoC
 
     public void print(String message) {
         System.out.println(message);
+    }
+
+    public void print(Number number) {
+        System.out.println(number);
     }
 
     private void printPrompt(String message) {

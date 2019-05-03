@@ -44,6 +44,6 @@ public final class TriangleStarter implements Starter {
     }
 
     public static TriangleStarter getInstance() {
-        return TRIANGLE_STARTER;
+        return TriangleStarter.TRIANGLE_STARTER;
     }
 }
