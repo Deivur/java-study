@@ -26,10 +26,12 @@ public class FileParserStarter implements Starter {
             if (argsLength == 2) {
                 String counting = args[1];
                 consoleWorker.print(parser.countOccurrencesOfSubstring(counting));
+
             } else if (argsLength == 3) {
                 String searching = args[1];
                 String replace = args[2];
                 parser.replaceFileSubstring(searching, replace);
+
             } else {
                 consoleWorker.print(RUN_INSTRUCTION);
             }
