@@ -2,5 +2,5 @@ package com.elementary.starter;
 
 public interface Starter {
 
-    void start(String[] args) throws Exception;
+    void start(String[] args);
 }

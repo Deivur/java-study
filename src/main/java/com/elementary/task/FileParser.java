@@ -12,11 +12,13 @@ public class FileParser {
     private final Path path;
     private String file;
 
-    public FileParser(String filePath) throws IOException {
+    public FileParser(String filePath) {
         this.path = Paths.get(filePath);
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             this.file = reader.lines()
                     .collect(Collectors.joining());
+        } catch (IOException ioe) {
+            throw new FileParserException("Cant read file, path: " + path, ioe);
         }
     }
 
@@ -30,8 +32,12 @@ public class FileParser {
         return count;
     }
 
-    public void replaceFileSubstring(String searching, String replace) throws IOException {
+    public void replaceFileSubstring(String searching, String replace) {
         file = file.replace(searching, replace);
-        Files.write(path, file.getBytes());
+        try {
+            Files.write(path, file.getBytes());
+        } catch (IOException ioe) {
+            throw new FileParserException("Cant write file, path: " + path, ioe);
+        }
     }
 }
