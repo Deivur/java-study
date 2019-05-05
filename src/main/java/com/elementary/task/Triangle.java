@@ -1,10 +1,6 @@
 package com.elementary.task;
 
-import java.util.List;
-
 public class Triangle {
-
-    public static final int REQUIRED_ATTRIBUTE_NUMBER = 4;
 
     private final String name;
     private final double sideA;
@@ -14,31 +10,21 @@ public class Triangle {
 
 
     public Triangle(String name, double sideA, double sideB, double sideC) {
-        if (exist(sideA, sideB, sideC)) {
-            this.name = name;
-            this.sideA = sideA;
-            this.sideB = sideB;
-            this.sideC = sideC;
-            this.square = calculateSquare();
-        } else {
-            String errorMessage = "Triangle with sides: " + sideA + ", " + sideB + ", " + sideC + " cant exist";
-            throw new IllegalArgumentException(errorMessage);
-        }
-
+        TriangleValidator.validate(sideA, sideB, sideC);
+        this.name = name;
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
+        this.square = calculateSquare();
     }
 
     public static Triangle from(String[] params) {
-        if (params.length < REQUIRED_ATTRIBUTE_NUMBER) {
-            String errorMessage = "Required " + REQUIRED_ATTRIBUTE_NUMBER + " attributes, passed " + params.length;
-            throw new IllegalArgumentException(errorMessage);
-        } else {
-            String name = params[0];
-            double sideA = Double.parseDouble(params[1]);
-            double sideB = Double.parseDouble(params[2]);
-            double sideC = Double.parseDouble(params[3]);
+        String name = params[0];
+        double sideA = Double.parseDouble(params[1]);
+        double sideB = Double.parseDouble(params[2]);
+        double sideC = Double.parseDouble(params[3]);
 
-            return new Triangle(name, sideA, sideB, sideC);
-        }
+        return new Triangle(name, sideA, sideB, sideC);
     }
 
     public String getName() {
@@ -63,12 +49,8 @@ public class Triangle {
 
     private double calculateSquare() {
         // p - semi-perimeter
-        double p = (this.sideA + this.sideB + this.sideC) / 2;
-        return Math.sqrt(p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC));
-    }
-
-    private boolean exist(double sideA, double sideB, double sideC) {
-        return (sideA < sideB + sideC) && (sideB < sideA + sideC) && (sideC < sideA + sideB);
+        double p = (sideA + sideB + sideC) / 2;
+        return Math.sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
     }
 
     @Override

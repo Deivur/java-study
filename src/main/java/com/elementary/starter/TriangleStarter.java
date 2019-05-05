@@ -1,11 +1,9 @@
 package com.elementary.starter;
 
-import com.elementary.io.DoubleConsoleWorker;
 import com.elementary.io.StringConsoleWorker;
 import com.elementary.task.Triangle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,6 +14,7 @@ public final class TriangleStarter implements Starter {
             "<name>, <side length>, <side length>, <side length>\n";
 
     private static TriangleStarter TRIANGLE_STARTER = new TriangleStarter();
+    public static final int REQUIRED_ATTRIBUTE_NUMBER = 4;
 
     private TriangleStarter() {
     }
@@ -31,11 +30,17 @@ public final class TriangleStarter implements Starter {
                 for (int i = 0; i < params.length; i++) {
                     params[i] = params[i].trim().toLowerCase();
                 }
-                try {
-                    Triangle triangle = Triangle.from(params);
-                    triangles.add(triangle);
-                } catch (IllegalArgumentException iae) {
-                    consoleWorker.print(iae.getMessage());
+                if (params.length < REQUIRED_ATTRIBUTE_NUMBER) {
+                    String warningMessage = "Required " + REQUIRED_ATTRIBUTE_NUMBER + " attributes, passed "
+                            + params.length;
+                    consoleWorker.print(warningMessage);
+                } else {
+                    try {
+                        Triangle triangle = Triangle.from(params);
+                        triangles.add(triangle);
+                    } catch (IllegalArgumentException iae) {
+                        consoleWorker.print(iae.getMessage());
+                    }
                 }
             } while (consoleWorker.continueInput());
             triangles.sort(Comparator.comparing(Triangle::getSquare));
