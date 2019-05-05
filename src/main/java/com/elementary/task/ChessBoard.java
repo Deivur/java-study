@@ -10,9 +10,9 @@ public class ChessBoard {
     private final String board;
 
     public ChessBoard(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.board = generateBoard(width, height);
+        this.width = Math.abs(width);
+        this.height = Math.abs(height);
+        this.board = generateBoard(this.width, this.height);
     }
 
     private String generateBoard(int width, int height) {

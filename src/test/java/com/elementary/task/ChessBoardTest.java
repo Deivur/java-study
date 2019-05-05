@@ -1,17 +1,25 @@
 package com.elementary.task;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChessBoardTest {
 
-    @Test
-    void checkBoardGenerating() {
-        int width = 11;
-        int height = 5;
+    @ParameterizedTest
+    @CsvSource({
+            "11, 5",
+            "3, 4",
+            "1236, 345",
+            "-123, 5",
+            "-76, -43"
+    })
+    void checkBoardGenerating(@AggregateWith(ChessBoardAggregator.class) ChessBoard chessBoard) {
+        int width = chessBoard.getWidth();
+        int height = chessBoard.getHeight();
         int cellCount = width * height + (height - 1);
-        ChessBoard chessBoard = new ChessBoard(width, height);
 
         String board = chessBoard.getBoard();
 
