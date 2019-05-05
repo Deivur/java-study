@@ -14,7 +14,8 @@ class ChessBoardTest {
             "3, 4",
             "1236, 345",
             "-123, 5",
-            "-76, -43"
+            "-76, -43",
+            "0, 2"
     })
     void checkBoardGenerating(@AggregateWith(ChessBoardAggregator.class) ChessBoard chessBoard) {
         int width = chessBoard.getWidth();

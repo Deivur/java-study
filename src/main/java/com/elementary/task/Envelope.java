@@ -8,8 +8,8 @@ public class Envelope {
     private final double height;
 
     public Envelope(double width, double height) {
-        this.width = width;
-        this.height = height;
+        this.width = Math.abs(width);
+        this.height = Math.abs(height);
     }
 
     public double getWidth() {
