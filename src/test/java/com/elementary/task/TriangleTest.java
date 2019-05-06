@@ -28,6 +28,7 @@ class TriangleTest {
             "triangle2, 180, 52, 63",
             "triangle3, 18, 52, 0",
             "triangle4, 0, 0, 0",
+            "triangle4, 1234, 0, 2",
     })
     void whenTwoSidesBiggerThanException(ArgumentsAccessor arguments) {
 
