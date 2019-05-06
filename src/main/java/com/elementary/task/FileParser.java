@@ -16,7 +16,7 @@ public class FileParser {
         this.path = Paths.get(filePath);
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             this.file = reader.lines()
-                    .collect(Collectors.joining());
+                    .collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException ioe) {
             throw new FileParserException("Cant read file, path: " + path, ioe);
         }

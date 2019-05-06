@@ -1,6 +1,8 @@
 package com.elementary.task;
 
-public class TriangleValidator {
+public final class TriangleValidator {
+
+    private TriangleValidator() {}
 
     public static boolean exist(double sideA, double sideB, double sideC) {
         if (sideA == 0 || sideB == 0 || sideC == 0) {
