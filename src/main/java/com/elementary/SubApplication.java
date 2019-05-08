@@ -9,9 +9,10 @@ public enum SubApplication {
     TRIANGLE(TriangleStarter.getInstance()),
     FILE_PARSER(FileParserStarter.getInstance()),
     NUMBER_TO_WORDS(NumberToWordsStarter.getInstance()),
+    LUCKY_TICKETS(LuckyTicketsStarter.getInstance()),
     NUMBER_SEQUENCE(NumberSequenceStarter.getInstance()),
-    FAST_POW(FastPowStarter.getInstance()),
-    FIBONACCI(FibonacciStarted.getInstance());
+    FIBONACCI(FibonacciStarted.getInstance()),
+    FAST_POW(FastPowStarter.getInstance());
 
     private Starter starter;
 

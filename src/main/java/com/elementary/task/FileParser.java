@@ -10,22 +10,22 @@ import java.util.stream.Collectors;
 public class FileParser {
 
     private final Path path;
-    private String file;
+    private String content;
 
     public FileParser(String filePath) {
         this.path = Paths.get(filePath);
         try (BufferedReader reader = Files.newBufferedReader(path)) {
-            this.file = reader.lines()
+            this.content = reader.lines()
                     .collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException ioe) {
-            throw new FileParserException("Cant read file, path: " + path, ioe);
+            throw new FileParserException("Cant read content, path: " + path, ioe);
         }
     }
 
     public int countOccurrencesOfSubstring(String substring) {
         int count = 0;
         int index = 0;
-        while ((index = file.indexOf(substring, index)) != -1) {
+        while ((index = content.indexOf(substring, index)) != -1) {
             count++;
             index++;
         }
@@ -33,11 +33,15 @@ public class FileParser {
     }
 
     public void replaceFileSubstring(String searching, String replace) {
-        file = file.replace(searching, replace);
+        content = content.replace(searching, replace);
         try {
-            Files.write(path, file.getBytes());
+            Files.write(path, content.getBytes());
         } catch (IOException ioe) {
-            throw new FileParserException("Cant write file, path: " + path, ioe);
+            throw new FileParserException("Cant write content, path: " + path, ioe);
         }
+    }
+
+    public String getContent() {
+        return content;
     }
 }
