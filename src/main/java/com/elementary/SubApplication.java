@@ -1,7 +1,6 @@
 package com.elementary;
 
 import com.elementary.starter.*;
-import com.elementary.task.NumberToWords;
 
 public enum SubApplication {
 
@@ -9,7 +8,8 @@ public enum SubApplication {
     ENVELOPE(EnvelopeStarter.getInstance()),
     TRIANGLE(TriangleStarter.getInstance()),
     FILE_PARSER(FileParserStarter.getInstance()),
-    NUMBER_TO_WORDS(NumberToWordsStarter.getInstance());
+    NUMBER_TO_WORDS(NumberToWordsStarter.getInstance()),
+    NUMBER_SEQUENCE(NumberSequenceStarter.getInstance());
 
     private Starter starter;
 
