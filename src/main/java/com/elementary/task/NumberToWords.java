@@ -1,65 +1,90 @@
 package com.elementary.task;
 
-import java.text.DecimalFormat;
-
 public final class NumberToWords {
 
     private NumberToWords() {
     }
 
-    private static final String[] tens = {"", "десять", "двадцать", "тридцать", "сорок", "пятьдесят",
-            "шестьдесят", "семьдесят", "восемьдесят", "девяносто"};
+    private static final String[][] nums =
+            {
+                    {"", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"},
+                    {"", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"}
+            };
 
-    private static final String[] nums = {"", "один", "два", "три", "четыре", "пять", "шесть", "семь",
-            "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
-            "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"};
+    private static final String[] nums10 =
+            {"", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+                    "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"};
 
-    private static final String[] hundreds = {"", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот",
-            "семьсот", "восемьсот", "девятьсот"};
+    private static final String[] tens =
+            {"", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят",
+                    "восемьдесят", "девяносто"};
 
-    private static String convertLessThanOneThousand(int number) {
-        String remainder;
-        if (number % 100 < 20) {
-            remainder = nums[number % 100];
-            number /= 100;
-        } else {
-            remainder = nums[number % 10];
-            number /= 10;
+    private static final String[] hundreds =
+            {"", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот",
+                    "восемьсот", "девятьсот"};
 
-            remainder = tens[number % 10] + " " + remainder;
-            number /= 10;
-        }
-        if (number == 0) {
-            return remainder;
-        }
-        return hundreds[number] + " " + remainder;
-    }
+    private static final String[][] thousands =
+            {
+                    {"", "", "", "0"},
+                    {"тысяча", "тысячи", "тысяч", "1"},
+                    {"миллион", "миллиона", "миллионов", "0"},
+                    {"миллиард", "миллиарда", "миллиардов", "0"},
+                    {"триллион", "триллиона", "триллионов", "0"}
+            };
 
+    public static final long MAX_VALUE = 999999999999999L;
 
     public static String convert(long number) {
-        if (number == 0) {
-            return "ноль";
+        return convert(number, 0);
+    }
+
+    private static String convert(long number, int level) {
+        if (number > MAX_VALUE) {
+            return "значение превышает максимально допустимое!";
         }
-        String mask = "000000000000";
-        DecimalFormat format = new DecimalFormat(mask);
-        String stringNumber = format.format(number);
-        // XXXnnnnnnnnn
-        int billions = Integer.parseInt(stringNumber.substring(0, 3));
-        // nnnXXXnnnnnn
-        int millions = Integer.parseInt(stringNumber.substring(3, 6));
-        // nnnnnnXXXnnn
-        int hundredThousands = Integer.parseInt(stringNumber.substring(6, 9));
-        // nnnnnnnnnXXX
-        int thousands = Integer.parseInt(stringNumber.substring(9, 12));
+        StringBuilder words = new StringBuilder();
+        if (number < 0) {
+            words.append("минус ");
+            number = Math.abs(number);
+        }
+        if (number == 0) {
+            words.append("ноль");
+        }
+        int gender = Integer.parseInt(thousands[level][3]);
+        int numberSegment = (int) (number % 1000);
+        int hundred = numberSegment / 100;
+        int ten = (numberSegment / 10) % 10;
+        int one = numberSegment % 10;
+        if (hundred > 0) {
+            words.append(hundreds[hundred]).append(" ");
+        }
+        if (ten > 0) {
+            if (ten == 1 && one > 0) {
+                words.append(nums10[one]).append(" ");
+                one = 0;
+            } else {
+                words.append(tens[ten]).append(" ");
 
-        String result = billions == 0 ? "" : convertLessThanOneThousand(billions) + " миллиард ";
-
-        result = result + (millions == 0 ? "" : convertLessThanOneThousand(millions) + " миллион ");
-
-        result = result + (hundredThousands == 0 ? "" : convertLessThanOneThousand(hundredThousands) + " тысяча ");
-
-        result = result + convertLessThanOneThousand(thousands);
-
-        return result;
+            }
+        }
+        if (one > 0) {
+            words.append(nums[gender][one]).append(" ");
+        }
+        if (one > 0 || ten > 0 || hundred > 0) {
+            if (one == 1) {
+                words.append(thousands[level][0]).append(" ");
+            } else if (one >= 2 && one <= 4) {
+                words.append(thousands[level][1]).append(" ");
+            } else {
+                words.append(thousands[level][2]).append(" ");
+            }
+        }
+        long nextNumber = number / 1000;
+        if (nextNumber > 0) {
+            level++;
+            return (convert(nextNumber, level) + " " + words.toString()).trim();
+        } else {
+            return words.toString().trim();
+        }
     }
 }
