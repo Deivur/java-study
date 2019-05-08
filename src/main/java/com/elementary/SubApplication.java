@@ -10,7 +10,8 @@ public enum SubApplication {
     FILE_PARSER(FileParserStarter.getInstance()),
     NUMBER_TO_WORDS(NumberToWordsStarter.getInstance()),
     NUMBER_SEQUENCE(NumberSequenceStarter.getInstance()),
-    FAST_POW(FastPowStarter.getInstance());
+    FAST_POW(FastPowStarter.getInstance()),
+    FIBONACCI(FibonacciStarted.getInstance());
 
     private Starter starter;
 
