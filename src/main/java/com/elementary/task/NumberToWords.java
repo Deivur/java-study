@@ -35,16 +35,16 @@ public final class NumberToWords {
     public static final long MAX_VALUE = 999999999999999L;
 
     public static String convert(long number) {
-        return convert(number, 0);
+        return convert(number, 0, false);
     }
 
-    private static String convert(long number, int level) {
+    private static String convert(long number, int level, boolean isNegative) {
         if (number > MAX_VALUE) {
             return "значение превышает максимально допустимое!";
         }
         StringBuilder words = new StringBuilder();
         if (number < 0) {
-            words.append("минус ");
+            isNegative = true;
             number = Math.abs(number);
         }
         if (number == 0) {
@@ -55,6 +55,13 @@ public final class NumberToWords {
         int hundred = numberSegment / 100;
         int ten = (numberSegment / 10) % 10;
         int one = numberSegment % 10;
+        long nextNumber = number / 1000;
+        // add minus if negative number and last iteration
+        if (nextNumber <= 0) {
+            if (isNegative) {
+                words.append("минус ");
+            }
+        }
         if (hundred > 0) {
             words.append(hundreds[hundred]).append(" ");
         }
@@ -79,10 +86,9 @@ public final class NumberToWords {
                 words.append(thousands[level][2]).append(" ");
             }
         }
-        long nextNumber = number / 1000;
         if (nextNumber > 0) {
             level++;
-            return (convert(nextNumber, level) + " " + words.toString()).trim();
+            return (convert(nextNumber, level, isNegative) + " " + words.toString()).trim();
         } else {
             return words.toString().trim();
         }

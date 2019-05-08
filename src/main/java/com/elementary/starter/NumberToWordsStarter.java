@@ -12,7 +12,7 @@ public class NumberToWordsStarter implements Starter {
 
     @Override
     public void start(String[] args) {
-        try (IntegerConsoleWorker consoleWorker = new IntegerConsoleWorker().setMinValue(0)) {
+        try (IntegerConsoleWorker consoleWorker = new IntegerConsoleWorker()) {
             do {
                 int number = consoleWorker.read("Enter integer number:");
                 String numberInWords = NumberToWords.convert(number);

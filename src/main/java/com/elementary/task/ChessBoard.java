@@ -9,21 +9,21 @@ public class ChessBoard {
     private final int height;
     private final String board;
 
-    public ChessBoard(int width, int height) {
+    public ChessBoard(int width, int height, boolean whiteFirst) {
         this.width = Math.abs(width);
         this.height = Math.abs(height);
-        this.board = generateBoard(this.width, this.height);
+        this.board = generateBoard(this.width, this.height, whiteFirst);
     }
 
-    private String generateBoard(int width, int height) {
+    private String generateBoard(int width, int height, boolean whiteFirst) {
         StringBuilder board = new StringBuilder();
-        String line = generateLine(width);
-        String inverseLine = generateInverseLine(width);
+        String blackFirstLine = generateLine(width);
+        String whiteFirstLine = generateInverseLine(width);
         for (int i = 0; i < height; i++) {
             if (NumberUtil.isEven(i)) {
-                board.append(line);
+                board.append(whiteFirst ? whiteFirstLine : blackFirstLine);
             } else {
-                board.append(inverseLine);
+                board.append(whiteFirst ? blackFirstLine : whiteFirstLine);
             }
             board.append("\n");
         }

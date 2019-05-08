@@ -10,6 +10,6 @@ class ChessBoardAggregator implements ArgumentsAggregator {
     public Object aggregateArguments(ArgumentsAccessor arguments, ParameterContext parameterContext)
             throws ArgumentsAggregationException {
 
-        return new ChessBoard(arguments.getInteger(0), arguments.getInteger(1));
+        return new ChessBoard(arguments.getInteger(0), arguments.getInteger(1), true);
     }
 }

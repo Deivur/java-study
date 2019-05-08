@@ -20,8 +20,11 @@ public final class ChessBoardStarter implements Starter {
             consoleWorker.print(RUN_INSTRUCTION);
             int width = consoleWorker.read("Enter an integer chessboard width");
             int height = consoleWorker.read("Enter an integer chessboard height");
-            ChessBoard chessBoard = new ChessBoard(width, height);
-            consoleWorker.print(chessBoard.getBoard());
+            ChessBoard blackChessBoard = new ChessBoard(width, height, true);
+            consoleWorker.print(blackChessBoard.getBoard());
+            consoleWorker.print("----------------");
+            ChessBoard whiteChessBoard = new ChessBoard(width, height, false);
+            consoleWorker.print(whiteChessBoard.getBoard());
         }
     }
 
