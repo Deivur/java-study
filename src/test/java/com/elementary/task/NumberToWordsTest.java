@@ -1,6 +1,5 @@
 package com.elementary.task;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -34,7 +33,6 @@ class NumberToWordsTest {
         String expected = arguments.getString(1);
 
         String actual = NumberToWords.convert(arguments.getLong(0));
-        System.out.println(actual);
 
         assertEquals(expected, actual);
     }
