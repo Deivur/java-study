@@ -32,7 +32,7 @@ public final class NumberToWords {
                     {"триллион", "триллиона", "триллионов", "0"}
             };
 
-    public static final long MAX_VALUE = 999999999999999L;
+    private static final long MAX_VALUE = 999999999999999L;
 
     public static String convert(long number) {
         return convert(number, 0, false);
