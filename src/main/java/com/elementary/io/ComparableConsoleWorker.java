@@ -26,7 +26,7 @@ public abstract class ComparableConsoleWorker<T extends Comparable, K extends Co
 
     @Override
     public boolean checkConditions(T value) {
-        boolean isValidPreviousCheck = super.checkConditions(value);
+        boolean isValidPreviousChecks = super.checkConditions(value);
         boolean isValid = isInRange(value);
         if (!isValid) {
             String message = "Expected a " + value.getClass().getSimpleName().toLowerCase();
@@ -41,6 +41,6 @@ public abstract class ComparableConsoleWorker<T extends Comparable, K extends Co
             }
             print(message);
         }
-        return isValid & isValidPreviousCheck;
+        return isValid & isValidPreviousChecks;
     }
 }

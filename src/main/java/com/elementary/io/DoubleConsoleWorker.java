@@ -1,7 +1,5 @@
 package com.elementary.io;
 
-import java.util.Optional;
-
 public class DoubleConsoleWorker extends ComparableConsoleWorker<Double, DoubleConsoleWorker> {
 
     @Override
